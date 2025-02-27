@@ -74,7 +74,7 @@ jobs:
           include: PdArchEcsCoreSourceGenerator/PdArchEcsCoreSourceGenerator.csproj
 
       - name: 📦 Build
-        run: dotnet build \ PdArchEcsCoreSourceGenerator/PdArchEcsCoreSourceGenerator.csproj -c Release
+        run: dotnet build PdArchEcsCoreSourceGenerator/PdArchEcsCoreSourceGenerator.csproj -c Release
 
       - name: 🔎 Get Package Path
         id: package-path
