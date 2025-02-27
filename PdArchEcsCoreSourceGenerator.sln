@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdArchEcsCoreSourceGenerator", "PdArchEcsCoreSourceGenerator\PdArchEcsCoreSourceGenerator.csproj", "{D5D1535F-84DF-4A53-8AFF-8E790D54638A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdArchEcsCoreSourceGenerator.Tests", "PdArchEcsCoreSourceGenerator.Tests\PdArchEcsCoreSourceGenerator.Tests.csproj", "{B34CA09C-10B4-4A80-A328-9C8C7296C69C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5D1535F-84DF-4A53-8AFF-8E790D54638A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5D1535F-84DF-4A53-8AFF-8E790D54638A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5D1535F-84DF-4A53-8AFF-8E790D54638A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5D1535F-84DF-4A53-8AFF-8E790D54638A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B34CA09C-10B4-4A80-A328-9C8C7296C69C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B34CA09C-10B4-4A80-A328-9C8C7296C69C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B34CA09C-10B4-4A80-A328-9C8C7296C69C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B34CA09C-10B4-4A80-A328-9C8C7296C69C}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal

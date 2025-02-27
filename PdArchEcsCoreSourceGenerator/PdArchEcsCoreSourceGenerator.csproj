@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <LangVersion>latest</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nullable>disable</Nullable>
+    <CopyAllFiles>true</CopyAllFiles>
+    <RootNamespace>PdArchEcsCoreSourceGenerator</RootNamespace>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <OutputPath>./nupkg</OutputPath>
+
+    <Title>PdArchEcsCoreSourceGenerator</Title>
+    <Version>0.0.0-devbuild</Version>
+    <Description>PdArchEcsCoreSourceGenerator description.</Description>
+    <Copyright>© 2024 nazgul30</Copyright>
+    <Authors>nazgul30</Authors>
+    <Company>nazgul30</Company>
+
+    <PackageId>PdArchEcsCoreSourceGenerator</PackageId>
+    <PackageReleaseNotes>PdArchEcsCoreSourceGenerator release.</PackageReleaseNotes>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags />
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl></PackageProjectUrl>
+
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl></RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="\" />
+    <None Include="../LICENSE" Pack="true" PackagePath="\" />
+    <None Include="./icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" PrivateAssets="all" />
+    </ItemGroup>
+
+  <ItemGroup>
+    <!-- Dependencies go here. -->
+    <PackageReference Include="PdArchEcsCore" Version="1.0.0" />
+    <PackageReference Include="IsExternalInit" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="SauceControl.InheritDoc" Version="2.0.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="GodotSharp" Version="4.3.0" />
+  </ItemGroup>
+</Project>
