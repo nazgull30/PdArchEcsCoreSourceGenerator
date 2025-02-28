@@ -113,7 +113,7 @@ using PdPools;
         context.AddSource($"EcsCodeGen.Worlds/WorldExtensions.g.cs", code.FormatCode());
     }
 
-    private bool hasAttribute(ISymbol symbol, string attributeFullName)
+    private static bool HasAttribute(ISymbol symbol, string attributeFullName)
     {
         return symbol.GetAttributes().Any(attr => attr.AttributeClass.ToDisplayString() == attributeFullName);
 
