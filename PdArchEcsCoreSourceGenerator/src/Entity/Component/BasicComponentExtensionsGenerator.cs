@@ -1,7 +1,7 @@
 namespace EcsCodeGen.Entity.Component;
 
-using global::System.Collections.Immutable;
 using EcsCodeGen.Utils;
+using global::System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -37,7 +37,7 @@ namespace Ecs.Components
                              }
                          }
                      }
-                     """;
+""";
 
         var formattedCode = code.FormatCode();
 
