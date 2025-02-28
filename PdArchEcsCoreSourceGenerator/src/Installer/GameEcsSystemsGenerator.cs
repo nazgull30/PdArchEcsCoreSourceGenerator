@@ -90,50 +90,51 @@ public class GameEcsSystemsGenerator : IIncrementalGenerator
             noneRegisterLines.Append(lines).Append("\n");
         });
 
-        var code = @$"""
+        var code = $$"""
 
 using VContainer;
 
-{namespacesSb}
+{{namespacesSb}}
 
-                     namespace Ecs.Installers {{
-                     	public static class GameEcsSystems {{
-                     		public static void Install(IContainerBuilder builder, bool isDebug = true){{
+                     namespace Ecs.Installers {
+                     	public static class GameEcsSystems {
+                     		public static void Install(IContainerBuilder builder, bool isDebug = true)
+                     		{
                      			Urgent(builder, isDebug);
                      			High(builder, isDebug);
                      			Normal(builder, isDebug);
                      			Low(builder, isDebug);
                      			None(builder, isDebug);
-                     		}}
+                     		}
 
                      		private static void Urgent(IContainerBuilder builder, bool isDebug)
-                     		{{
-                     			{urgentRegisterLines}
-                     		}}
+                     		{
+                     			{{urgentRegisterLines}}
+                     		}
 
                      		private static void High(IContainerBuilder builder, bool isDebug)
-                     		{{
-                     			{highRegisterLines}
-                     		}}
+                     		{
+                     			{{highRegisterLines}}
+                     		}
 
                      		private static void Normal(IContainerBuilder builder, bool isDebug)
-                     		{{
-                     			{normalRegisterLines}
-                     		}}
+                     		{
+                     			{{normalRegisterLines}}
+                     		}
 
                      		private static void Low(IContainerBuilder builder, bool isDebug)
-                     		{{
-                     			{lowRegisterLines}
-                     		}}
+                     		{
+                     			{{lowRegisterLines}}
+                     		}
 
                      		private static void None(IContainerBuilder builder, bool isDebug)
-                     		{{
-                     			{noneRegisterLines}
-                     		}}
+                     		{
+                     			{{noneRegisterLines}}
+                     		}
 
-                     	}}
-                     }}
-                     """;
+                     	}
+                     }
+""";
 
         var formattedCode = code.FormatCode();
 

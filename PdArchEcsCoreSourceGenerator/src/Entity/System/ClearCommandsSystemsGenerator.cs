@@ -43,7 +43,7 @@ public class ClearCommandsSystemsGenerator : IIncrementalGenerator
             clearSb.AppendLine($"commandBuffer.Clear<On{componentName}Changed>();");
         }
 
-        var code = @$"""
+        var code = $$"""
 using Arch.Core;
 using Arch.Core.Extensions;
 using Core.CommandBuffer;
@@ -54,14 +54,14 @@ namespace Ecs.Systems;
 
                      public sealed class ClearEventCommandsSystem(ICommandBuffer commandBuffer)
                          : IUpdateSystem
-                     {{
+                     {
                          public void Update(double t)
-                         {{
-                     	    {clearSb}
-                         }}
+                         {
+                     	    {{clearSb}}
+                         }
 
-                     }}
-                     """;
+                     }
+""";
         context.AddSource($"EcsCodeGen.Systems/ClearEventCommandsSystem.g.cs", code.FormatCode());
     }
 }

@@ -45,20 +45,20 @@ public class CommandBufferExtensionsGenerator : IIncrementalGenerator
             namespacesSb.Append("using ").Append(ns).Append(";\n");
         }
 
-        var code = @$"""
-                    using System.Collections.Generic;
-                    using Core.CommandBuffer;
+        var code = $$"""
+using System.Collections.Generic;
+using Core.CommandBuffer;
 
-                    {namespacesSb}
+{{namespacesSb}}
 
                      namespace Core.CommandBuffer
-                     {{
+                     {
                        public static class CommandBufferExtensions
-                       {{
-                             {methodsSb}
-                       }}
-                     }}
-                     """;
+                       {
+                             {{methodsSb}}
+                       }
+                     }
+""";
 
         var formattedCode = code.FormatCode();
 

@@ -47,20 +47,20 @@ public class GameEventSystemsGenerator : IIncrementalGenerator
             stringBuilder.Append($"builder.Register<On{componentName}ChangedEventSystem>(Lifetime.Singleton).AsImplementedInterfaces();");
         }
 
-        var code = @$"""
+        var code = $$"""
 
 using Ecs.Systems;
 
-namespace Ecs.Installers {{
-                     	public static class GameEventSystems {{
-                     		public static void Install(IContainerBuilder builder){{
-                     			{stringBuilder}
+namespace Ecs.Installers {
+                     	public static class GameEventSystems {
+                     		public static void Install(IContainerBuilder builder){
+                     			{{stringBuilder}}
 
                      			builder.Register<ClearEventCommandsSystem>(Lifetime.Singleton).AsImplementedInterfaces();
-                     		}}
-                     	}}
-                     }}
-                     """;
+                     		}
+                     	}
+                     }
+""";
 
         var formattedCode = code.FormatCode();
 

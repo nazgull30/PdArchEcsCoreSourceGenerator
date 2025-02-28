@@ -28,15 +28,15 @@ public class WorldWrappersGenerator : IIncrementalGenerator
             var interfaceSymbol = semanticModel.GetDeclaredSymbol(ctx);
 
             var className = interfaceSymbol.Name.Remove(0, 1);
-            var code = @$"""
+            var code = $$"""
 
 using Core.Worlds;
 
-using {interfaceSymbol.ContainingNamespace.ToDisplayString()};
+using {{interfaceSymbol.ContainingNamespace.ToDisplayString()}};
 
-                         public class {className}(Arch.Core.World world) : WorldWrapper(world), {interfaceSymbol.Name};
+                         public class {{className}}(Arch.Core.World world) : WorldWrapper(world), {{interfaceSymbol.Name}};
 
-                         """;
+""";
 
             var formattedCode = code.FormatCode();
 

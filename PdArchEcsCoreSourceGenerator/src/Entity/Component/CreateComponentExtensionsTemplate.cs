@@ -39,34 +39,34 @@ public static class CreateComponentExtensionsTemplate
 
         var eventsCode = CreateComponentEventsTemplate.Generate(stx, semanticModel);
 
-        var code = @$"""
+        var code = $$"""
 using Arch.Core;
 using Arch.Core.Extensions;
 using Core.CommandBuffer;
 using Core.Exceptions;
 
-{namespacesBuilder}
+{{namespacesBuilder}}
 
-                     {extension}
+                     {{extension}}
 
                      namespace Ecs.Components
-                     {{
+                     {
                          public static partial class ComponentExtensions
-                         {{
-                            {getter}
+                         {
+                            {{getter}}
 
-                            {has}
+                            {{has}}
 
-                            {addCode}
+                            {{addCode}}
 
-                            {replaceCode}
+                            {{replaceCode}}
 
-                            {removeCode}
-                         }}
+                            {{removeCode}}
+                         }
 
-                         {eventsCode}
-                     }}
-                     """;
+                         {{eventsCode}}
+                     }
+""";
 
 
         return (componentName, code);

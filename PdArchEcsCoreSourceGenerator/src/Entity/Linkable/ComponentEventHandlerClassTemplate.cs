@@ -51,7 +51,7 @@ public static class ComponentEventHandlerClassTemplate
                 """;
 
 
-        var code = @$"""
+        var code = $$"""
 using Core.Utils;
 using Ecs.Components;
 using Godot;
@@ -59,10 +59,10 @@ using PdEventBus.Impls;
 using PdEventBus.Utils;
 using VContainer;
 
-namespace {classSymbol.ContainingNamespace.ToDisplayString()};
+namespace {{classSymbol.ContainingNamespace.ToDisplayString()}};
 
-                     public partial class {classSymbol.Name}
-                     {{
+                     public partial class {{classSymbol.Name}}
+                     {
                          private readonly CompositeDisposable _disposables = new();
                          protected Entity entity;
 
@@ -70,39 +70,39 @@ namespace {classSymbol.ContainingNamespace.ToDisplayString()};
                          private ILinkedEntityRepository _linkedEntityRepository;
 
                          public void Link(Entity entity, ILinkedEntityRepository linkedEntityRepository)
-                         {{
+                         {
                              this.entity = entity;
                              _linkedEntityRepository = linkedEntityRepository;
                              _linkedEntityRepository.Add(GetInstanceId(), entity);
 
-                             {eventSubscriptionsCode}
-                         }}
+                             {{eventSubscriptionsCode}}
+                         }
 
                          public void Link(Entity entity)
-                         {{
+                         {
                              this.entity = entity;
                              _linkedEntityRepository.Add(GetInstanceId(), entity);
 
-                             {eventSubscriptionsCode}
-                         }}
+                             {{eventSubscriptionsCode}}
+                         }
 
                          public void Unlink()
-                         {{
+                         {
                             entity = default;
                             _disposables.Dispose();
-                         }}
+                         }
 
                          private bool CanHandleEvent(Entity entity)
-                         {{
+                         {
                              var e = _linkedEntityRepository?.Get(GetInstanceId());
                              return e.Equals(entity);
-                         }}
+                         }
 
-                         {eventHandlersCode}
+                         {{eventHandlersCode}}
 
-                         {exitTreeCode}
-                     }}
-                     """;
+                         {{exitTreeCode}}
+                     }
+""";
         return code;
     }
 

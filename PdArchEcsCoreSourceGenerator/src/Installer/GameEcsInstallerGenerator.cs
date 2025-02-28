@@ -66,7 +66,7 @@ public class GameEcsInstallerGenerator : IIncrementalGenerator
         var nameSpacesSb = new StringBuilder();
         nameSpaces.ToList().ForEach(ns => nameSpacesSb.Append(ns));
 
-        var code = @$"""
+        var code = $$"""
 using Arch.Core;
 using Core;
 using Core.CommandBuffer;
@@ -79,21 +79,21 @@ using Ecs.Installers;
 using VContainer;
 using VContainer.Unity;
 
-{nameSpacesSb}
+{{nameSpacesSb}}
 
                      namespace Ecs.Installers;
 
                      public partial class GameEcsInstaller
-                     {{
+                     {
                          public override void Install(IContainerBuilder builder)
-                         {{
+                         {
                              var commandBuffer = new CommandBuffer();
                              ComponentExtensions.Init(commandBuffer);
                              builder.RegisterInstance<ICommandBuffer>(commandBuffer);
 
-                             {worldsSb}
+                             {{worldsSb}}
 
-                             {groupsSb}
+                             {{groupsSb}}
 
                              builder.Register<Feature>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
                              builder.RegisterEntryPoint<Bootstrap>().AsSelf();
@@ -102,9 +102,9 @@ using VContainer.Unity;
 
                              GameEcsSystems.Install(builder, false);
                              GameEventSystems.Install(builder);
-                         }}
-                     }}
-                     """;
+                         }
+                     }
+""";
         context.AddSource($"EcsCodeGen.Installer/GameEcsInstaller.g.cs", code.FormatCode());
 
     }

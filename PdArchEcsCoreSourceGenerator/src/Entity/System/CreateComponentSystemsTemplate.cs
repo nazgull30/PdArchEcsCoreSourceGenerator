@@ -28,7 +28,7 @@ public static class CreateComponentSystemsTemplate
         var onRemovedReactiveSystem = CreateOnRemovedReactiveSystem(componentName);
         var onChangedReactiveSystem = CreateOnChangedReactiveSystem(componentName);
 
-        var code = @$"""
+        var code = $$"""
 using System;
 using System.Collections.Generic;
 using Arch.Core;
@@ -38,23 +38,23 @@ using Core.Entities;
 using Ecs.Components;
 using PdEventBus.Impls;
 
-using {ns};
+using {{ns}};
 
                      namespace Ecs.Systems
-                     {{
-                        {onAddedEventSystem}
+                     {
+                        {{onAddedEventSystem}}
 
-                        {onRemovedEventSystem}
+                        {{onRemovedEventSystem}}
 
-                        {onChangedEventSystem}
+                        {{onChangedEventSystem}}
 
-                        {onAddedReactiveSystem}
+                        {{onAddedReactiveSystem}}
 
-                        {onRemovedReactiveSystem}
+                        {{onRemovedReactiveSystem}}
 
-                        {onChangedReactiveSystem}
-                     }}
-                     """;
+                        {{onChangedReactiveSystem}}
+                     }
+""";
 
 
         return (componentName, code);

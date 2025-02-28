@@ -52,12 +52,12 @@ public static class CreateCommandTemplate
             : $"public static void {methodName}(this ICommandBuffer commandBuffer)";
 
 
-        var code = @$"""
-			             {methodDeclaration}
-			             {{
+        var code = $$"""
+			             {{methodDeclaration}}
+			             {
 			             	ref var command = ref commandBuffer.Create<{{structSymbol.Name}}>();
-			             	{bodyLines}
-			             }}
+			             	{{bodyLines}}
+			             }
 			             """;
 
         return (code, namespaces);

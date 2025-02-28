@@ -92,7 +92,7 @@ public class WorldExtensionsGenerator : IIncrementalGenerator
         var namespacesSb = new StringBuilder();
         namespaces.ToList().ForEach(ns => namespacesSb.AppendLine($"using {ns};"));
 
-        var code = @$"""
+        var code = $$"""
 using System;
 using System.Collections.Generic;
 using Arch.Core;
@@ -102,13 +102,13 @@ using Core.Worlds;
 using Ecs.Components;
 using PdPools;
 
-{namespacesSb}
+{{namespacesSb}}
 
                      public static class WorldExtensions
-                     {{
-                        {methodsSb}
-                     }}
-                     """;
+                     {
+                        {{methodsSb}}
+                     }
+""";
 
         context.AddSource($"EcsCodeGen.Worlds/WorldExtensions.g.cs", code.FormatCode());
     }
