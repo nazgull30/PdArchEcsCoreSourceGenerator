@@ -55,7 +55,7 @@ public class WorldExtensionsGenerator : IIncrementalGenerator
                         Field = field,
                         Symbol = semanticModel.GetDeclaredSymbol(variable) as IFieldSymbol
                     }))
-                .Where(x => x.Symbol != null && HasAttribute(x.Symbol, "Core.Attributes.PrimaryEntityIndexAttribute"))
+                .Where(x => x.Symbol != null && HasAttribute(x.Symbol, "PdArchEcsCore.Attributes.PrimaryEntityIndexAttribute"))
                 .ToList();
 
             foreach (var field in fieldsWithPrimaryEntityIndexAttribute)
@@ -75,7 +75,7 @@ public class WorldExtensionsGenerator : IIncrementalGenerator
                         Field = field,
                         Symbol = semanticModel.GetDeclaredSymbol(variable) as IFieldSymbol
                     }))
-                .Where(x => x.Symbol != null && HasAttribute(x.Symbol, "Core.Attributes.EntityIndexAttribute"))
+                .Where(x => x.Symbol != null && HasAttribute(x.Symbol, "PdArchEcsCore.Attributes.EntityIndexAttribute"))
                 .ToList();
 
             foreach (var field in fieldsWithEntityIndexAttribute)
@@ -96,9 +96,9 @@ public class WorldExtensionsGenerator : IIncrementalGenerator
 using System;
 using System.Collections.Generic;
 using Arch.Core;
-using Core.Exceptions;
-using Core.Utils;
-using Core.Worlds;
+using PdArchEcsCore.Exceptions;
+using PdArchEcsCore.Utils;
+using PdArchEcsCore.Worlds;
 using Ecs.Components;
 using PdPools;
 

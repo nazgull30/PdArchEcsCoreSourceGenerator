@@ -32,9 +32,9 @@ public static class CreateComponentSystemsTemplate
 using System;
 using System.Collections.Generic;
 using Arch.Core;
-using Core.CommandBuffer;
-using Core.CommandBuffer.Systems;
-using Core.Entities;
+using PdArchEcsCore.CommandBuffer;
+using PdArchEcsCore.CommandBuffer.Systems;
+using PdArchEcsCore.Entities;
 using Ecs.Components;
 using PdEventBus.Impls;
 

@@ -42,8 +42,8 @@ public static class CreateComponentExtensionsTemplate
         var code = $$"""
 using Arch.Core;
 using Arch.Core.Extensions;
-using Core.CommandBuffer;
-using Core.Exceptions;
+using PdArchEcsCore.CommandBuffer;
+using PdArchEcsCore.Exceptions;
 
 {{namespacesBuilder}}
 

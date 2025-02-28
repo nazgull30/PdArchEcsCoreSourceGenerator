@@ -47,11 +47,11 @@ public class CommandBufferExtensionsGenerator : IIncrementalGenerator
 
         var code = $$"""
 using System.Collections.Generic;
-using Core.CommandBuffer;
+using PdArchEcsCore.CommandBuffer;
 
 {{namespacesSb}}
 
-                     namespace Core.CommandBuffer
+                     namespace PdArchEcsCore.CommandBuffer
                      {
                        public static class CommandBufferExtensions
                        {

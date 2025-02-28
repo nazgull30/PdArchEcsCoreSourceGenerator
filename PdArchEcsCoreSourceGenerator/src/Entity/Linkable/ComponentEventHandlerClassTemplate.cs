@@ -52,7 +52,7 @@ public static class ComponentEventHandlerClassTemplate
 
 
         var code = $$"""
-using Core.Utils;
+using PdArchEcsCore.Utils;
 using Ecs.Components;
 using Godot;
 using PdEventBus.Impls;

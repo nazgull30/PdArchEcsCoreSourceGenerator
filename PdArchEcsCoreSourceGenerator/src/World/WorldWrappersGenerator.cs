@@ -30,7 +30,7 @@ public class WorldWrappersGenerator : IIncrementalGenerator
             var className = interfaceSymbol.Name.Remove(0, 1);
             var code = $$"""
 
-using Core.Worlds;
+using PdArchEcsCore.Worlds;
 
 using {{interfaceSymbol.ContainingNamespace.ToDisplayString()}};
 

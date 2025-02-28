@@ -71,7 +71,7 @@ public class ComponentEventHandlerGenerator : IIncrementalGenerator
 
         while (classSymbol != null)
         {
-            if (classSymbol.AllInterfaces.Any(i => i.ToDisplayString() == "Core.Utils.ILinkable"))
+            if (classSymbol.AllInterfaces.Any(i => i.ToDisplayString() == "PdArchEcsCore.Utils.ILinkable"))
             {
                 return true;
             }

@@ -46,8 +46,8 @@ public class ClearCommandsSystemsGenerator : IIncrementalGenerator
         var code = $$"""
 using Arch.Core;
 using Arch.Core.Extensions;
-using Core.CommandBuffer;
-using Core.Systems;
+using PdArchEcsCore.CommandBuffer;
+using PdArchEcsCore.Systems;
 using Ecs.Components;
 
 namespace Ecs.Systems;

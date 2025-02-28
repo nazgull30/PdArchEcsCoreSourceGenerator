@@ -18,8 +18,8 @@ public class GameEcsInstallerGenerator : IIncrementalGenerator
                 predicate: (node, _) => node is InterfaceDeclarationSyntax,
                 transform: (context, _) => (context.Node as InterfaceDeclarationSyntax, context.SemanticModel))
             .Where(pair =>
-                Utilities.ImplementsInterface("Core.Worlds.IWorld", pair.Item1, pair.Item2)
-                || Utilities.ImplementsInterface("Core.Interfaces.IGroup", pair.Item1, pair.Item2)
+                Utilities.ImplementsInterface("PdArchEcsCore.Worlds.IWorld", pair.Item1, pair.Item2)
+                || Utilities.ImplementsInterface("PdArchEcsCore.Interfaces.IGroup", pair.Item1, pair.Item2)
                 )
             .Collect();
 
@@ -34,7 +34,7 @@ public class GameEcsInstallerGenerator : IIncrementalGenerator
 
         foreach (var (ctx, semanticModel) in interfaces)
         {
-            if (!Utilities.ImplementsInterface("Core.Worlds.IWorld", ctx, semanticModel))
+            if (!Utilities.ImplementsInterface("PdArchEcsCore.Worlds.IWorld", ctx, semanticModel))
             {
                 continue;
             }
@@ -50,7 +50,7 @@ public class GameEcsInstallerGenerator : IIncrementalGenerator
         var groupsSb = new StringBuilder();
         foreach (var (ctx, semanticModel) in interfaces)
         {
-            if (!Utilities.ImplementsInterface("Core.Interfaces.IGroup", ctx, semanticModel))
+            if (!Utilities.ImplementsInterface("PdArchEcsCore.Interfaces.IGroup", ctx, semanticModel))
             {
                 continue;
             }
@@ -68,12 +68,12 @@ public class GameEcsInstallerGenerator : IIncrementalGenerator
 
         var code = $$"""
 using Arch.Core;
-using Core;
-using Core.CommandBuffer;
-using Core.Interfaces;
-using Core.Systems;
-using Core.Utils;
-using Core.Utils.Impl;
+using PdArchEcsCore;
+using PdArchEcsCore.CommandBuffer;
+using PdArchEcsCore.Interfaces;
+using PdArchEcsCore.Systems;
+using PdArchEcsCore.Utils;
+using PdArchEcsCore.Utils.Impl;
 using Ecs.Components;
 using Ecs.Installers;
 using VContainer;

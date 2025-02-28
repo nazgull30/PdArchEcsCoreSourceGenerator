@@ -22,9 +22,10 @@ public class BasicComponentExtensionsGenerator : IIncrementalGenerator
     private void GenerateCode(SourceProductionContext context, ImmutableArray<ClassDeclarationSyntax> classes)
     {
         var code = $$"""
-                     using Core.CommandBuffer;
 
-                     namespace Ecs.Components
+using PdArchEcsCore.CommandBuffer;
+
+namespace Ecs.Components
                      {
                          public static partial class ComponentExtensions
                          {
