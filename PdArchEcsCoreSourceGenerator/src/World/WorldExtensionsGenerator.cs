@@ -100,6 +100,7 @@ using Ecs.Components;
 using PdArchEcsCore.Exceptions;
 using PdArchEcsCore.Utils;
 using PdArchEcsCore.Worlds;
+using PdPools;
 
 {{namespacesSb}}
 
@@ -112,7 +113,7 @@ using PdArchEcsCore.Worlds;
         context.AddSource($"EcsCodeGen.Worlds/WorldExtensions.g.cs", code.FormatCode());
     }
 
-    private bool HasAttribute(ISymbol symbol, string attributeFullName)
+    private bool hasAttribute(ISymbol symbol, string attributeFullName)
     {
         return symbol.GetAttributes().Any(attr => attr.AttributeClass.ToDisplayString() == attributeFullName);
 

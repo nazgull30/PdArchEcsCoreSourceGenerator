@@ -14,7 +14,7 @@ public class WorldWrappersGenerator : IIncrementalGenerator
             .CreateSyntaxProvider(
                 predicate: (node, _) => node is InterfaceDeclarationSyntax,
                 transform: (context, _) => (context.Node as InterfaceDeclarationSyntax, context.SemanticModel))
-            .Where(pair => Utilities.ImplementsInterface("Core.Worlds.IWorld", pair.Item1, pair.Item2))
+            .Where(pair => Utilities.ImplementsInterface("PdArchEcsCore.Worlds.IWorld", pair.Item1, pair.Item2))
             .Collect();
 
         context.RegisterSourceOutput(interfaceDeclarations, GenerateCode);
