@@ -96,11 +96,10 @@ public class WorldExtensionsGenerator : IIncrementalGenerator
 using System;
 using System.Collections.Generic;
 using Arch.Core;
+using Ecs.Components;
 using PdArchEcsCore.Exceptions;
 using PdArchEcsCore.Utils;
 using PdArchEcsCore.Worlds;
-using Ecs.Components;
-using PdPools;
 
 {{namespacesSb}}
 

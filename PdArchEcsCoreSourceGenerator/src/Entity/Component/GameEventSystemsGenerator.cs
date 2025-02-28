@@ -50,6 +50,7 @@ public class GameEventSystemsGenerator : IIncrementalGenerator
         var code = $$"""
 
 using Ecs.Systems;
+using VContainer;
 
 namespace Ecs.Installers {
                      	public static class GameEventSystems {
