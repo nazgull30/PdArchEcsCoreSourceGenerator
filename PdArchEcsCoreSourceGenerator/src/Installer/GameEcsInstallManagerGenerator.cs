@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 [Generator]
-public class GameEcsInstallerGenerator : IIncrementalGenerator
+public class GameEcsInstallManagerGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -68,14 +68,14 @@ public class GameEcsInstallerGenerator : IIncrementalGenerator
 
         var code = $$"""
 using Arch.Core;
+using Ecs.Components;
+using Ecs.Installers;
 using PdArchEcsCore;
 using PdArchEcsCore.CommandBuffer;
 using PdArchEcsCore.Interfaces;
 using PdArchEcsCore.Systems;
 using PdArchEcsCore.Utils;
 using PdArchEcsCore.Utils.Impl;
-using Ecs.Components;
-using Ecs.Installers;
 using VContainer;
 using VContainer.Unity;
 
@@ -83,9 +83,9 @@ using VContainer.Unity;
 
                      namespace Ecs.Installers;
 
-                     public partial class GameEcsInstaller
+                     public static class GameEcsInstallManager
                      {
-                         public override void Install(IContainerBuilder builder)
+                         public static void Install(IContainerBuilder builder)
                          {
                              var commandBuffer = new CommandBuffer();
                              ComponentExtensions.Init(commandBuffer);
@@ -105,7 +105,7 @@ using VContainer.Unity;
                          }
                      }
 """;
-        context.AddSource($"EcsCodeGen.Installer/GameEcsInstaller.g.cs", code.FormatCode());
+        context.AddSource($"EcsCodeGen.Installer/GameEcsInstallManager.g.cs", code.FormatCode());
 
     }
 }

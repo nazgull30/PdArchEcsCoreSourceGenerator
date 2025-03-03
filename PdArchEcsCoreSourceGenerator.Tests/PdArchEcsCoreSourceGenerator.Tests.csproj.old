@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.3.0">
+<Project Sdk="Godot.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
@@ -8,13 +8,16 @@
     <RootNamespace>PdArchEcsCoreSourceGenerator.Tests</RootNamespace>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
+
     <!-- Required for some nuget packages to work -->
     <!-- godotengine/godot/issues/42271#issuecomment-751423827 -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+
     <!-- To show generated files -->
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>.generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
+
   <ItemGroup>
     <!-- Test executor. -->
     <PackageReference Include="Chickensoft.GoDotTest" Version="1.5.2" />
@@ -25,13 +28,10 @@
     <!-- Convenience wrapper around generated mocks. -->
     <PackageReference Include="LightMoq" Version="0.1.0" />
   </ItemGroup>
+
   <ItemGroup>
     <!-- Include the package to test. -->
-        <ProjectReference
-            Include="../PdArchEcsCoreSourceGenerator/PdArchEcsCoreSourceGenerator.csproj"
+    <ProjectReference Include="../PdArchEcsCoreSourceGenerator/PdArchEcsCoreSourceGenerator.csproj"
             OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-        <PackageReference Include="PdEventBus" Version="1.0.2" />
-        <PackageReference Include="PdArchEcsCore" Version="1.0.0" />
-        <PackageReference Include="PdPools" Version="1.0.0" />
   </ItemGroup>
 </Project>

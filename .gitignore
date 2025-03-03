@@ -2,9 +2,12 @@
 !**/coverage/.gdignore
 nupkg/
 .godot/
+.idea/
 bin/
 obj/
 .generated/
+.addons/
+addons/
 .vs/
 .DS_Store
 *.DotSettings.user

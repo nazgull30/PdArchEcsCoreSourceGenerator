@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="PdArchEcsCoreSourceGenerator.Tests"
-run/main_scene="res://test/Tests.tscn"
-config/features=PackedStringArray("4.2", "C#", "Mobile")
+run/main_scene="res://sample/Tests.tscn"
+config/features=PackedStringArray("4.3", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [dotnet]
