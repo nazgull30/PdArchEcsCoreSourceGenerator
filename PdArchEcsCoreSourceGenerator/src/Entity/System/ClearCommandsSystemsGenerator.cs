@@ -48,9 +48,9 @@ using Arch.Core;
 using Arch.Core.Extensions;
 using PdArchEcsCore.CommandBuffer;
 using PdArchEcsCore.Systems;
-using Ecs.Components;
+using PdArchEcsCore.Components;
 
-namespace Ecs.Systems;
+namespace PdArchEcsCore.Systems;
 
                      public sealed class ClearEventCommandsSystem(ICommandBuffer commandBuffer)
                          : IUpdateSystem

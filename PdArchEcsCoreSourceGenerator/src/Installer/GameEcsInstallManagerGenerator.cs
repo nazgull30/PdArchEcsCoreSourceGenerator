@@ -68,7 +68,7 @@ public class GameEcsInstallManagerGenerator : IIncrementalGenerator
 
         var code = $$"""
 using Arch.Core;
-using Ecs.Components;
+using PdArchEcsCore.Components;
 using Ecs.Installers;
 using PdArchEcsCore;
 using PdArchEcsCore.CommandBuffer;

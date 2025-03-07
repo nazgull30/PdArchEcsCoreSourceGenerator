@@ -15,7 +15,7 @@
     <OutputPath>./nupkg</OutputPath>
 
     <Title>PdArchEcsCoreSourceGenerator</Title>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <Description>PdArchEcsCoreSourceGenerator description.</Description>
     <Copyright>© 2024 nazgul30</Copyright>
     <Authors>nazgul30</Authors>

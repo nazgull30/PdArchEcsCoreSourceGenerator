@@ -35,12 +35,12 @@ using Arch.Core;
 using PdArchEcsCore.CommandBuffer;
 using PdArchEcsCore.CommandBuffer.Systems;
 using PdArchEcsCore.Entities;
-using Ecs.Components;
+using PdArchEcsCore.Components;
 using PdEventBus.Impls;
 
 using {{ns}};
 
-                     namespace Ecs.Systems
+                     namespace PdArchEcsCore.Systems
                      {
                         {{onAddedEventSystem}}
 

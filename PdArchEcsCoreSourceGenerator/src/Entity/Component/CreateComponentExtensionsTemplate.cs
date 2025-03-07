@@ -49,7 +49,7 @@ using PdArchEcsCore.Exceptions;
 
                      {{extension}}
 
-                     namespace Ecs.Components
+                     namespace PdArchEcsCore.Components
                      {
                          public static partial class ComponentExtensions
                          {

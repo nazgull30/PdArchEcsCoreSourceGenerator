@@ -25,7 +25,7 @@ public class BasicComponentExtensionsGenerator : IIncrementalGenerator
 
 using PdArchEcsCore.CommandBuffer;
 
-namespace Ecs.Components
+namespace PdArchEcsCore.Components
                      {
                          public static partial class ComponentExtensions
                          {
