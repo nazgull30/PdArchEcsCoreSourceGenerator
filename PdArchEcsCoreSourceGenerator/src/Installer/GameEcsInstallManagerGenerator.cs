@@ -69,7 +69,7 @@ public class GameEcsInstallManagerGenerator : IIncrementalGenerator
         var code = $$"""
 using Arch.Core;
 using PdArchEcsCore.Components;
-using Ecs.Installers;
+using PdArchEcsCore.Installers;
 using PdArchEcsCore;
 using PdArchEcsCore.CommandBuffer;
 using PdArchEcsCore.Interfaces;
@@ -81,7 +81,7 @@ using VContainer.Unity;
 
 {{nameSpacesSb}}
 
-                     namespace Ecs.Installers;
+                     namespace PdArchEcsCore.Installers;
 
                      public static class GameEcsInstallManager
                      {
