@@ -67,13 +67,13 @@ public class GameEcsInstallManagerGenerator : IIncrementalGenerator
         nameSpaces.ToList().ForEach(ns => nameSpacesSb.Append(ns));
 
         var code = $$"""
+namespace PdArchEcsCore.Installers;
+
 using Arch.Core;
-using PdArchEcsCore.Components;
-using PdArchEcsCore.Installers;
-using PdArchEcsCore;
 using PdArchEcsCore.CommandBuffer;
-using PdArchEcsCore.Interfaces;
+using PdArchEcsCore.Components;
 using PdArchEcsCore.Systems;
+using PdArchEcsCore.Installers;
 using PdArchEcsCore.Utils;
 using PdArchEcsCore.Utils.Impl;
 using VContainer;
@@ -81,29 +81,28 @@ using VContainer.Unity;
 
 {{nameSpacesSb}}
 
-                     namespace PdArchEcsCore.Installers;
+public static class GameEcsInstallManager
+{
+    public static void Install(IContainerBuilder builder)
+    {
+        var commandBuffer = new PdArchEcsCore.CommandBuffer.CommandBuffer();
+        ComponentExtensions.Init(commandBuffer);
+        builder.RegisterInstance<ICommandBuffer>(commandBuffer);
 
-                     public static class GameEcsInstallManager
-                     {
-                         public static void Install(IContainerBuilder builder)
-                         {
-                             var commandBuffer = new CommandBuffer();
-                             ComponentExtensions.Init(commandBuffer);
-                             builder.RegisterInstance<ICommandBuffer>(commandBuffer);
+        {{worldsSb}}
 
-                             {{worldsSb}}
+        {{groupsSb}}
 
-                             {{groupsSb}}
+        builder.Register<Feature>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+        builder.RegisterEntryPoint<Bootstrap>().AsSelf();
 
-                             builder.Register<Feature>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-                             builder.RegisterEntryPoint<Bootstrap>().AsSelf();
+        builder.Register<LinkedEntityRepository>(Lifetime.Singleton).As<ILinkedEntityRepository>();
 
-                             builder.Register<LinkedEntityRepository>(Lifetime.Singleton).As<ILinkedEntityRepository>();
+        GameEcsSystems.Install(builder, false);
+        GameEventSystems.Install(builder);
+    }
+}
 
-                             GameEcsSystems.Install(builder, false);
-                             GameEventSystems.Install(builder);
-                         }
-                     }
 """;
         context.AddSource($"EcsCodeGen.Installer/GameEcsInstallManager.g.cs", code.FormatCode());
 

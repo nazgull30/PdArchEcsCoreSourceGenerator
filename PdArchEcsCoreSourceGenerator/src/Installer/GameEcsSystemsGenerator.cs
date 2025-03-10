@@ -96,7 +96,7 @@ using VContainer;
 
 {{namespacesSb}}
 
-                     namespace Ecs.Installers {
+                     namespace PdArchEcsCore.Installers {
                      	public static class GameEcsSystems {
                      		public static void Install(IContainerBuilder builder, bool isDebug = true)
                      		{
