@@ -35,7 +35,7 @@ public static class WorldExtensionsMethodsTemplate
     public static string CreateForEntityIndex(string componentName, string fieldName, ITypeSymbol symbol)
     {
         var code = $$"""
-                     public static List<Entity> GetEntitiesWith.{{componentName}}(this IWorld world, {{symbol.ToDisplayString()}} value)
+                     public static List<Entity> GetEntitiesWith{{componentName}}(this IWorld world, {{symbol.ToDisplayString()}} value)
                      {
                          using var _ = GetEntities(world, out var entities, in new QueryDescription().WithAll<{{componentName}}>(),
                              e => e.{{componentName}}().{{fieldName}} == value);
