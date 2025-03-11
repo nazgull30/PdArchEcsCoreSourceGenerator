@@ -52,6 +52,7 @@ public class WorldExtensionsGenerator : IIncrementalGenerator
                 .SelectMany(field => field.Declaration.Variables
                     .Select(variable => new
                     {
+                        FieldName = variable.Identifier.Text,
                         Field = field,
                         Symbol = semanticModel.GetDeclaredSymbol(variable) as IFieldSymbol
                     }))
@@ -61,7 +62,7 @@ public class WorldExtensionsGenerator : IIncrementalGenerator
             foreach (var field in fieldsWithPrimaryEntityIndexAttribute)
             {
                 var fieldTypeSymbol = semanticModel.GetTypeInfo(field.Field.Declaration.Type).Type;
-                var methodForPrimaryEntityIndex = WorldExtensionsMethodsTemplate.CreateForPrimaryEntityIndex(componentName, fieldTypeSymbol);
+                var methodForPrimaryEntityIndex = WorldExtensionsMethodsTemplate.CreateForPrimaryEntityIndex(componentName, field.FieldName, fieldTypeSymbol);
                 methodsSb.AppendLine(methodForPrimaryEntityIndex);
                 namespaces.Add(field.Symbol.ContainingNamespace.ToDisplayString());
             }
@@ -72,6 +73,7 @@ public class WorldExtensionsGenerator : IIncrementalGenerator
                 .SelectMany(field => field.Declaration.Variables
                     .Select(variable => new
                     {
+                        FieldName = variable.Identifier.Text,
                         Field = field,
                         Symbol = semanticModel.GetDeclaredSymbol(variable) as IFieldSymbol
                     }))
@@ -81,7 +83,7 @@ public class WorldExtensionsGenerator : IIncrementalGenerator
             foreach (var field in fieldsWithEntityIndexAttribute)
             {
                 var fieldTypeSymbol = semanticModel.GetTypeInfo(field.Field.Declaration.Type).Type;
-                var methodForEntityIndex = WorldExtensionsMethodsTemplate.CreateForEntityIndex(componentName, fieldTypeSymbol);
+                var methodForEntityIndex = WorldExtensionsMethodsTemplate.CreateForEntityIndex(componentName, field.FieldName, fieldTypeSymbol);
                 methodsSb.AppendLine(methodForEntityIndex);
                 namespaces.Add(field.Symbol.ContainingNamespace.ToDisplayString());
             }

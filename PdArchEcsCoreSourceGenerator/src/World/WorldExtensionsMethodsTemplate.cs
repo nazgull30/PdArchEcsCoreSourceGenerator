@@ -13,13 +13,13 @@ public static class WorldExtensionsMethodsTemplate
         return code;
     }
 
-    public static string CreateForPrimaryEntityIndex(string componentName, ITypeSymbol symbol)
+    public static string CreateForPrimaryEntityIndex(string componentName, string fieldName, ITypeSymbol symbol)
     {
         var code = $$"""
                      public static Entity? GetEntityWith{{symbol.Name}}(this IWorld world, {{symbol.ToDisplayString()}} value)
                      {
                          using var _ = GetEntities(world, out var entities, in new QueryDescription().WithAll<{{componentName}}>(),
-                             e => e.{{componentName}}().Value == value);
+                             e => e.{{componentName}}().{{fieldName}} == value);
                          return entities.Count switch
                          {
                              0 => null,
@@ -32,13 +32,13 @@ public static class WorldExtensionsMethodsTemplate
         return code;
     }
 
-    public static string CreateForEntityIndex(string componentName, ITypeSymbol symbol)
+    public static string CreateForEntityIndex(string componentName, string fieldName, ITypeSymbol symbol)
     {
         var code = $$"""
-                     public static List<Entity> GetEntitiesWithOwner(this IWorld world, {{symbol.ToDisplayString()}} value)
+                     public static List<Entity> GetEntitiesWith.{{componentName}}(this IWorld world, {{symbol.ToDisplayString()}} value)
                      {
                          using var _ = GetEntities(world, out var entities, in new QueryDescription().WithAll<{{componentName}}>(),
-                             e => e.{{componentName}}().Value == value);
+                             e => e.{{componentName}}().{{fieldName}} == value);
                          return entities;
                      }
                      """;
