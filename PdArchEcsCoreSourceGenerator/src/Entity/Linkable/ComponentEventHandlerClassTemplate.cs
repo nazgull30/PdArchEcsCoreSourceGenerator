@@ -52,14 +52,15 @@ public static class ComponentEventHandlerClassTemplate
 
 
         var code = $$"""
+namespace {{classSymbol.ContainingNamespace.ToDisplayString()}};
+
+using Arch.Core;
 using PdArchEcsCore.Utils;
 using PdArchEcsCore.Components;
 using Godot;
 using PdEventBus.Impls;
 using PdEventBus.Utils;
 using VContainer;
-
-namespace {{classSymbol.ContainingNamespace.ToDisplayString()}};
 
                      public partial class {{classSymbol.Name}}
                      {
