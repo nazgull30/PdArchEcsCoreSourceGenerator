@@ -49,22 +49,22 @@ public static class WorldExtensionsMethodsTemplate
     public static string CreateGetEntities()
     {
         return $$"""
-    public static IDisposable GetEntities(
-        this IWorld world,
-        out List<Entity> buffer,
-        in QueryDescription queryDescription,
-        Func<Entity, bool>? filter = null)
+public static IDisposable GetEntities(
+    this IWorld world,
+    out List<Entity> buffer,
+    in QueryDescription queryDescription,
+    Func<Entity, bool>? filter = null)
+{
+    var pooledObject = ListPool<Entity>.Get(out buffer);
+    world.GetEntities(in queryDescription, buffer);
+
+    if (filter != null)
     {
-        var pooledObject = ListPool<Entity>.Get(out buffer);
-        world.GetEntities(in queryDescription, buffer);
-
-        if (filter != null)
-        {
-            buffer.RemoveAllWithSwap(e => !filter(e));
-        }
-
-        return pooledObject;
+        buffer.RemoveAllWithSwap(e => !filter(e));
     }
-                     """;
+
+    return pooledObject;
+}
+""";
     }
 }
