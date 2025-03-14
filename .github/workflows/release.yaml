@@ -44,17 +44,34 @@ jobs:
         id: current-version
         uses: WyriHaximus/github-action-get-previous-tag@v1
         with:
-          fallback: "1.1.0"
+          fallback: "1.0.1"
 
       - name: 🖨 Print Current Version
         run: |
           echo "Current Version: ${{ steps.current-version.outputs.tag }}"
+
+      - name: 🧮 Compute Next Version
+        uses: chickensoft-games/next-godot-csproj-version@v1
+        id: next-version
+        with:
+          project-version: ${{ steps.current-version.outputs.tag }}
+          godot-version: global.json
+          bump: ${{ inputs.bump }}
 
       - uses: actions/setup-dotnet@v4
         name: 💽 Setup .NET SDK
         with:
           # Use the .NET SDK from global.json in the root of the repository.
           global-json-file: global.json
+
+      # Write version to file so .NET will build correct version.
+      - name: 📝 Write Version to File
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "1.0.1"
+          replace: ${{ steps.next-version.outputs.version }}
+          regex: false
+          include: PdArchEcsCoreSourceGenerator/PdArchEcsCoreSourceGenerator.csproj
 
       - name: 📦 Build
         run: dotnet build PdArchEcsCoreSourceGenerator/PdArchEcsCoreSourceGenerator.csproj -c Release
