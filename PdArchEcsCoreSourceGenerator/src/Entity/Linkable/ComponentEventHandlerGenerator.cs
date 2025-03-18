@@ -1,12 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
+namespace EcsCodeGen.Entity.Linkable;
+
 using EcsCodeGen.Utils;
+using global::System;
+using global::System.Collections.Generic;
+using global::System.Collections.Immutable;
+using global::System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace EcsCodeGen.Entity.Linkable;
+
 
 [Generator]
 public class ComponentEventHandlerGenerator : IIncrementalGenerator
@@ -64,6 +66,7 @@ public class ComponentEventHandlerGenerator : IIncrementalGenerator
         var properEnded = name.EndsWith("Added") || name.EndsWith("Removed") || name.EndsWith("Changed");
         return name.StartsWith("On") && properEnded;
     }
+    
 
     private bool ImplementsILinkable(ClassDeclarationSyntax ctx, SemanticModel semanticModel)
     {

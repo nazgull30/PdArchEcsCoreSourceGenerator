@@ -3,6 +3,7 @@ namespace EcsCodeGen.Entity.Linkable;
 using EcsCodeGen.Utils;
 
 using global::System;
+using global::System.Collections.Generic;
 using global::System.Collections.Immutable;
 using global::System.Linq;
 using global::System.Text;
@@ -26,14 +27,34 @@ public static class ComponentEventHandlerClassTemplate
             eventHandlersCode.Append(eventHandlerCode).Append('\n');
         }
 
+
+
         var eventSubscriptionsCode = new StringBuilder();
         foreach (var eventHandler in eventHandlers)
         {
             var methodName = eventHandler.Identifier.Text;
-            eventSubscriptionsCode.Append($"Event<{methodName}>.Instance.Subscribe({methodName}Internal).AddTo(_disposables);\n");
+            eventSubscriptionsCode.AppendLine($"Event<{methodName}>.Instance.Subscribe({methodName}Internal).AddTo(_disposables);");
         }
 
         var onDestroyed = Utilities.HasAttribute(nameof(OnDestroyedAttribute), ctx, semanticModel);
+        var onInitializeOnLink = Utilities.HasAttribute(nameof(InitializeOnLinkAttribute), ctx, semanticModel);
+
+        var initializeOnLinkCode = new StringBuilder();
+        if (onInitializeOnLink)
+        {
+            var components = new HashSet<string>();
+            foreach (var eventHandler in eventHandlers)
+            {
+                var methodName = eventHandler.Identifier.Text;
+                var component = methodName.Replace("On", "").Replace("Added", "").Replace("Removed", "").Replace("Changed", "");
+                components.Add(component);
+            }
+
+            foreach (var component in components)
+            {
+                initializeOnLinkCode.AppendLine($"Set{component}(this.entity.{component}().Value)");
+            }
+        }
 
         var exitTreeCode = onDestroyed
             ? $$"""
@@ -77,6 +98,7 @@ using VContainer;
                              _linkedEntityRepository.Add(GetInstanceId(), entity);
 
                              {{eventSubscriptionsCode}}
+                             {{initializeOnLinkCode}}
                          }
 
                          public void Link(Entity entity)
@@ -85,6 +107,7 @@ using VContainer;
                              _linkedEntityRepository.Add(GetInstanceId(), entity);
 
                              {{eventSubscriptionsCode}}
+                             {{initializeOnLinkCode}}
                          }
 
                          public void Unlink()

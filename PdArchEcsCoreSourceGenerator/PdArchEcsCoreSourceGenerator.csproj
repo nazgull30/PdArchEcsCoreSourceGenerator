@@ -15,7 +15,7 @@
     <OutputPath>./nupkg</OutputPath>
 
     <Title>PdArchEcsCoreSourceGenerator</Title>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Description>PdArchEcsCoreSourceGenerator description.</Description>
     <Copyright>© 2024 nazgul30</Copyright>
     <Authors>nazgul30</Authors>
@@ -49,7 +49,7 @@
 
   <ItemGroup>
     <!-- Dependencies go here. -->
-    <PackageReference Include="PdArchEcsCore" Version="1.0.0" />
+    <PackageReference Include="PdArchEcsCore" Version="1.0.1" />
     <PackageReference Include="IsExternalInit" Version="1.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
