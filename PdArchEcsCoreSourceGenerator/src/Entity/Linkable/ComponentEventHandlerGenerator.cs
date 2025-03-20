@@ -30,27 +30,7 @@ public class ComponentEventHandlerGenerator : IIncrementalGenerator
         context.RegisterSourceOutput(combined, (context, source) => GenerateCode(context, source.Left, source.Right));
     }
 
-    public static List<MethodDeclarationSyntax> GetEventHandlers(ClassDeclarationSyntax syntax, SemanticModel semanticModel)
-    {
-        var classSymbol = semanticModel.GetDeclaredSymbol(syntax);
-        if (classSymbol == null)
-            throw new ArgumentException("structSymbol is null");
-
-        var eventHandlers = new List<MethodDeclarationSyntax>();
-
-        foreach (var method in syntax.Members.OfType<MethodDeclarationSyntax>())
-        {
-            var isComponentEventHandler = MatchesWithComponentEventHandler(method);
-            if (isComponentEventHandler)
-            {
-                eventHandlers.Add(method);
-            }
-        }
-
-        return eventHandlers;
-    }
-
-    private void GenerateCode(SourceProductionContext context,
+    private static void GenerateCode(SourceProductionContext context,
         ImmutableArray<(ClassDeclarationSyntax, SemanticModel)> classes, Compilation compilation)
     {
         foreach (var (ctx, semanticModel) in classes)
@@ -60,15 +40,7 @@ public class ComponentEventHandlerGenerator : IIncrementalGenerator
         }
     }
 
-    private static bool MatchesWithComponentEventHandler(MethodDeclarationSyntax method)
-    {
-        var name = method.Identifier.Text;
-        var properEnded = name.EndsWith("Added") || name.EndsWith("Removed") || name.EndsWith("Changed");
-        return name.StartsWith("On") && properEnded;
-    }
-    
-
-    private bool ImplementsILinkable(ClassDeclarationSyntax ctx, SemanticModel semanticModel)
+    private static bool ImplementsILinkable(ClassDeclarationSyntax ctx, SemanticModel semanticModel)
     {
         var classSymbol = semanticModel.GetDeclaredSymbol(ctx) as INamedTypeSymbol;
 

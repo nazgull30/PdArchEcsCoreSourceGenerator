@@ -19,7 +19,7 @@ public static class ComponentEventHandlerClassTemplate
         if (classSymbol == null)
             throw new ArgumentException("classSymbol is null");
 
-        var eventHandlers = ComponentEventHandlerGenerator.GetEventHandlers(ctx, semanticModel);
+        var eventHandlers = Utilities.GetAllMethods(classSymbol as ITypeSymbol).Where(MatchesWithComponentEventHandler);
         var eventHandlersCode = new StringBuilder();
         foreach (var eventHandler in eventHandlers)
         {
@@ -32,7 +32,7 @@ public static class ComponentEventHandlerClassTemplate
         var eventSubscriptionsCode = new StringBuilder();
         foreach (var eventHandler in eventHandlers)
         {
-            var methodName = eventHandler.Identifier.Text;
+            var methodName = eventHandler.Name;
             eventSubscriptionsCode.AppendLine($"Event<{methodName}>.Instance.Subscribe({methodName}Internal).AddTo(_disposables);");
         }
 
@@ -45,7 +45,7 @@ public static class ComponentEventHandlerClassTemplate
             var components = new HashSet<string>();
             foreach (var eventHandler in eventHandlers)
             {
-                var methodName = eventHandler.Identifier.Text;
+                var methodName = eventHandler.Name;
                 var component = methodName.Replace("On", "").Replace("Added", "").Replace("Removed", "").Replace("Changed", "");
                 components.Add(component);
             }
@@ -130,13 +130,11 @@ using VContainer;
         return code;
     }
 
-    private static string CreateEventHandler(Compilation compilation, MethodDeclarationSyntax method)
+    private static string CreateEventHandler(Compilation compilation, IMethodSymbol method)
     {
-        var semanticModel = compilation.GetSemanticModel(method.SyntaxTree);
-        var methodSymbol = semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
 
-        var methodParameters = GetMethodParameters(methodSymbol);
-        var methodName = method.Identifier.Text;
+        var methodParameters = GetMethodParameters(method);
+        var methodName = method.Name;
 
         // methodParameters = methodParameters.RemoveAll(p => p.Name == "Entity");
         if (methodParameters.Length == 0)
@@ -182,8 +180,13 @@ using VContainer;
 
     private static ImmutableArray<(string Name, string Type)> GetMethodParameters(IMethodSymbol methodSymbol)
     {
-        return methodSymbol.Parameters
-            .Select(param => (param.Name, param.Type.ToDisplayString()))
-            .ToImmutableArray();
+        return [.. methodSymbol.Parameters.Select(param => (param.Name, param.Type.ToDisplayString()))];
+    }
+
+    private static bool MatchesWithComponentEventHandler(IMethodSymbol method)
+    {
+        var name = method.Name;
+        var properEnded = name.EndsWith("Added") || name.EndsWith("Removed") || name.EndsWith("Changed");
+        return name.StartsWith("On") && properEnded;
     }
 }
