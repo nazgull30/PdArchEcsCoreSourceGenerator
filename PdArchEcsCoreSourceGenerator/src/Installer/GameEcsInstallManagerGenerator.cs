@@ -77,7 +77,7 @@ using PdArchEcsCore.Installers;
 using PdArchEcsCore.Utils;
 using PdArchEcsCore.Utils.Impl;
 using VContainer;
-using VContainer.Unity;
+using VContainer.Godot;
 
 {{nameSpacesSb}}
 
