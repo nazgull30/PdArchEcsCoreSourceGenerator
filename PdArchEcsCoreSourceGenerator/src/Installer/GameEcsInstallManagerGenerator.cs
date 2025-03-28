@@ -94,7 +94,7 @@ public static class GameEcsInstallManager
         {{groupsSb}}
 
         builder.Register<Feature>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-        builder.RegisterEntryPoint<Bootstrap>().AsSelf();
+        builder.Register<Bootstrap>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
         builder.Register<LinkedEntityRepository>(Lifetime.Singleton).As<ILinkedEntityRepository>();
 
