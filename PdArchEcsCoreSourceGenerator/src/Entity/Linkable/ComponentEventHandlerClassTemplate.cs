@@ -86,14 +86,14 @@ using VContainer;
                      public partial class {{classSymbol.Name}}
                      {
                          private readonly CompositeDisposable _disposables = new();
-                         protected Entity entity;
+                         public Entity Entity;
 
                          [Inject]
                          private ILinkedEntityRepository _linkedEntityRepository;
 
                          public void Link(Entity entity, ILinkedEntityRepository linkedEntityRepository)
                          {
-                             this.entity = entity;
+                             this.Entity = entity;
                              _linkedEntityRepository = linkedEntityRepository;
                              _linkedEntityRepository.Add(GetInstanceId(), entity);
 
@@ -103,7 +103,7 @@ using VContainer;
 
                          public void Link(Entity entity)
                          {
-                             this.entity = entity;
+                             this.Entity = entity;
                              _linkedEntityRepository.Add(GetInstanceId(), entity);
 
                              {{eventSubscriptionsCode}}
@@ -112,7 +112,7 @@ using VContainer;
 
                          public void Unlink()
                          {
-                            entity = default;
+                            Entity = default;
                             _disposables.Dispose();
                          }
 
