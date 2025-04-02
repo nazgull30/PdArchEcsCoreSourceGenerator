@@ -52,7 +52,7 @@ public static class ComponentEventHandlerClassTemplate
 
             foreach (var component in components)
             {
-                initializeOnLinkCode.AppendLine($"Set{component}(this.entity.{component}().Value);");
+                initializeOnLinkCode.AppendLine($"Set{component}(this.Entity.{component}().Value);");
             }
         }
 
