@@ -148,18 +148,18 @@ using {{ns}};
 
                          protected sealed override void Execute(Span<On{{componentName}}Added> commands)
                          {
-                             var lastEvent = commands[^1];
-                             var e = lastEvent.Entity;
-
-                             if (Filter(e))
-                             {
-                                 Execute(lastEvent.Entity, lastEvent.New{{componentName}});
-                             }
+                            foreach(var cmd in commands)
+                            {
+                                if (Filter(cmd.Entity))
+                                {
+                                    Execute(cmd.Entity, cmd.New{{componentName}});
+                                }
+                            }
                          }
 
-                         protected virtual bool Filter(Entity entity) => true;
+                         protected abstract bool Filter(Entity entity);
 
-                         protected virtual void Execute(Entity entity, {{componentName}} new{{componentName}}) {}
+                         protected abstract void Execute(Entity entity, {{componentName}} new{{componentName}});
                      }
                      """;
         return code;
@@ -175,18 +175,18 @@ using {{ns}};
 
                          protected sealed override void Execute(Span<On{{componentName}}Removed> commands)
                          {
-                             var lastEvent = commands[^1];
-                             var e = lastEvent.Entity;
-
-                             if (Filter(e))
-                             {
-                                 Execute(lastEvent.Entity);
-                             }
+                            foreach(var cmd in commands)
+                            {
+                                if (Filter(cmd.Entity))
+                                {
+                                    Execute(cmd.Entity);
+                                }
+                            }
                          }
 
-                         protected virtual bool Filter(Entity entity) => true;
+                         protected abstract bool Filter(Entity entity);
 
-                         protected virtual void Execute(Entity entity) {}
+                         protected abstract void Execute(Entity entity);
                      }
                      """;
         return code;
@@ -202,18 +202,19 @@ using {{ns}};
 
                          protected sealed override void Execute(Span<On{{componentName}}Changed> commands)
                          {
-                             var lastEvent = commands[^1];
-                             var e = lastEvent.Entity;
+                            foreach(var cmd in commands)
+                            {
+                                if (Filter(cmd.Entity) && !cmd.Old{{componentName}}.Equals(cmd.New{{componentName}}))
+                                {
+                                    Execute(cmd.Entity, cmd.Old{{componentName}}, cmd.New{{componentName}});
+                                }
+                            }
 
-                             if (Filter(e) && !lastEvent.Old{{componentName}}.Equals(lastEvent.New{{componentName}}))
-                             {
-                                 Execute(lastEvent.Entity, lastEvent.Old{{componentName}}, lastEvent.New{{componentName}});
-                             }
                          }
 
-                         protected virtual bool Filter(Entity entity) => true;
+                         protected abstract bool Filter(Entity entity);
 
-                         protected virtual void Execute(Entity entity, {{componentName}} old{{componentName}}, {{componentName}} new{{componentName}}) {}
+                         protected abstract void Execute(Entity entity, {{componentName}} old{{componentName}}, {{componentName}} new{{componentName}});
                      }
                      """;
         return code;
