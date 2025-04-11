@@ -36,6 +36,7 @@ using PdArchEcsCore.CommandBuffer;
 using PdArchEcsCore.CommandBuffer.Systems;
 using PdArchEcsCore.Entities;
 using PdArchEcsCore.Components;
+using PdArchEcsCore.Worlds;
 using PdEventBus.Impls;
 
 using {{ns}};
@@ -141,7 +142,7 @@ using {{ns}};
     private static string CreateOnAddedReactiveSystem(string componentName)
     {
         var code = $$"""
-                     public abstract class On{{componentName}}AddedReactiveSystem(ICommandBuffer commandBuffer)
+                     public abstract class On{{componentName}}AddedReactiveSystem(ICommandBuffer commandBuffer, IWorld world)
                          : CommandSystem<On{{componentName}}Added>(commandBuffer)
                      {
                          protected sealed override bool CleanUp => false;
@@ -150,7 +151,7 @@ using {{ns}};
                          {
                             foreach(var cmd in commands)
                             {
-                                if (Filter(cmd.Entity))
+                                if (cmd.Entity.WorldId == world.Id && Filter(cmd.Entity))
                                 {
                                     Execute(cmd.Entity, cmd.New{{componentName}});
                                 }
@@ -168,7 +169,7 @@ using {{ns}};
     private static string CreateOnRemovedReactiveSystem(string componentName)
     {
         var code = $$"""
-                     public abstract class On{{componentName}}RemovedReactiveSystem(ICommandBuffer commandBuffer)
+                     public abstract class On{{componentName}}RemovedReactiveSystem(ICommandBuffer commandBuffer, IWorld world)
                          : CommandSystem<On{{componentName}}Removed>(commandBuffer)
                      {
                          protected sealed override bool CleanUp => false;
@@ -177,7 +178,7 @@ using {{ns}};
                          {
                             foreach(var cmd in commands)
                             {
-                                if (Filter(cmd.Entity))
+                                if (cmd.Entity.WorldId == world.Id && Filter(cmd.Entity))
                                 {
                                     Execute(cmd.Entity);
                                 }
@@ -195,7 +196,7 @@ using {{ns}};
     private static string CreateOnChangedReactiveSystem(string componentName)
     {
         var code = $$"""
-                     public abstract class On{{componentName}}ChangedReactiveSystem(ICommandBuffer commandBuffer)
+                     public abstract class On{{componentName}}ChangedReactiveSystem(ICommandBuffer commandBuffer, IWorld world)
                          : CommandSystem<On{{componentName}}Changed>(commandBuffer)
                      {
                          protected sealed override bool CleanUp => false;
@@ -204,7 +205,7 @@ using {{ns}};
                          {
                             foreach(var cmd in commands)
                             {
-                                if (Filter(cmd.Entity) && !cmd.Old{{componentName}}.Equals(cmd.New{{componentName}}))
+                                if (cmd.Entity.WorldId == world.Id && Filter(cmd.Entity) && !cmd.Old{{componentName}}.Equals(cmd.New{{componentName}}))
                                 {
                                     Execute(cmd.Entity, cmd.Old{{componentName}}, cmd.New{{componentName}});
                                 }
