@@ -43,6 +43,8 @@ public class ComponentEventHandlerGenerator : IIncrementalGenerator
     private static bool ImplementsILinkable(ClassDeclarationSyntax ctx, SemanticModel semanticModel)
     {
         var classSymbol = semanticModel.GetDeclaredSymbol(ctx) as INamedTypeSymbol;
+        if (classSymbol.IsAbstract)
+            return false;
 
         while (classSymbol != null)
         {

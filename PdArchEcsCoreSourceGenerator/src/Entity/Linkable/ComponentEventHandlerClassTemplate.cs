@@ -56,22 +56,6 @@ public static class ComponentEventHandlerClassTemplate
             }
         }
 
-        var exitTreeCode = onDestroyed
-            ? $$"""
-                public override void _ExitTree()
-                {
-                    OnDestroyed();
-                    _disposables.Dispose();
-                }
-                """
-            : $$"""
-                public override void _ExitTree()
-                {
-                    _disposables.Dispose();
-                }
-                """;
-
-
         var code = $$"""
 namespace {{classSymbol.ContainingNamespace.ToDisplayString()}};
 
@@ -124,7 +108,6 @@ using VContainer;
 
                          {{eventHandlersCode}}
 
-                         {{exitTreeCode}}
                      }
 """;
         return code;
